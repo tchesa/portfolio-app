@@ -3,28 +3,6 @@ import { Education, Employment, EmploymentType, LocationType } from "@/types/con
 import { createClient } from "contentful"
 import Image from "next/image"
 
-const classes = {
-  sectionTitle: 'text-2xl pt-6',
-  sectionList: 'flex flex-row px-6 pb-6 w-full',
-  sectionListTitle: 'w-[400px] shrink-0',
-  sectionListContent: 'grow pt-6',
-}
-
-const employmentTypeLabel: { [employmentType in EmploymentType]: string } = {
-  'contract': 'Contract',
-  'freelance': 'Freelance',
-  'fullTime': 'Full-time',
-  'internship': 'Internship',
-  'partTime': 'Part-time',
-  'selfEmployed': 'Self-employed'
-}
-
-const locationTypeLabel: { [locationType in LocationType]: string } = {
-  'hybrid': 'Hybrid',
-  'onSite': 'On-site',
-  'remote': 'Remote'
-}
-
 const ResumePage = async () => {
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID || '',
@@ -39,6 +17,37 @@ const ResumePage = async () => {
       content_type: 'education'
     }),
   ])
+
+  const classes = {
+    sectionTitle: 'text-2xl pt-6',
+    sectionList: 'flex flex-row px-6 pb-6 w-full',
+    sectionListTitle: 'w-[400px] shrink-0',
+    sectionListContent: 'grow pt-6',
+  }
+
+  const employmentTypeLabel: { [employmentType in EmploymentType]: string } = {
+    'contract': 'Contract',
+    'freelance': 'Freelance',
+    'fullTime': 'Full-time',
+    'internship': 'Internship',
+    'partTime': 'Part-time',
+    'selfEmployed': 'Self-employed'
+  }
+
+  const locationTypeLabel: { [locationType in LocationType]: string } = {
+    'hybrid': 'Hybrid',
+    'onSite': 'On-site',
+    'remote': 'Remote'
+  }
+
+  const sortByDate = (a: Date, b: Date): number => {
+    return b.getTime() - a.getTime();
+  }
+
+  const dateFormatter = new Intl.DateTimeFormat('default', {
+    month: 'long',
+    year: 'numeric'
+  }).format
 
   const renderLocationType = (locationType: LocationType | undefined) => {
     if (locationType)
@@ -65,7 +74,7 @@ const ResumePage = async () => {
           <h2 id="employment" className={[classes.sectionTitle, classes.sectionListTitle].join(' ')}>Employment</h2>
           <div className={classes.sectionListContent}>
             <ul className="space-y-5">
-              {employmentEntries.items.map(employment => (
+              {employmentEntries.items.sort((a, b) => sortByDate(new Date(a.fields.endDate || new Date()), new Date(b.fields.endDate || new Date()))).map(employment => (
                 <li key={employment.sys.id}>
                   <div>
                     <div className="flex items-start">
@@ -77,9 +86,14 @@ const ResumePage = async () => {
                         <div className="flex items-center">
                           <h3 className="grow text-lg">{employment.fields.title || 'Untitled employment'}</h3>
                           <span className="block text-sm text-neutral-400">
-                            {employment.fields.startDate ? employment.fields.startDate : null}
-                            {employment.fields.startDate && employment.fields.endDate ? ' - ' : null}
-                            {employment.fields.endDate ? employment.fields.endDate : null}
+                            {employment.fields.startDate ? dateFormatter(new Date(employment.fields.startDate)) : null}
+                            {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? ' - ' : null}
+                            {employment.fields.currentlyWorkingHere
+                              ? 'Current'
+                              : employment.fields.endDate
+                                ? dateFormatter(new Date(employment.fields.endDate))
+                                : null
+                            }
                           </span>
                         </div>
                         <span className="block text-sm">
@@ -126,9 +140,9 @@ const ResumePage = async () => {
                             {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
                           </h3>
                           <span className="block text-sm text-neutral-400">
-                            {education.fields.startDate ? education.fields.startDate : null}
+                            {education.fields.startDate ? dateFormatter(new Date(education.fields.startDate)) : null}
                             {education.fields.startDate && education.fields.endDate ? ' - ' : null}
-                            {education.fields.endDate ? education.fields.endDate : null}
+                            {education.fields.endDate ? dateFormatter(new Date(education.fields.endDate)) : null}
                           </span>
                         </div>
                         <span className="block text-sm text-neutral-400">
