@@ -1,3 +1,4 @@
+import MarkdownRender from "@/components/markdown-render"
 import { Education, Employment, EmploymentType, LocationType } from "@/types/contentful"
 import { createClient } from "contentful"
 import Image from "next/image"
@@ -93,9 +94,9 @@ const ResumePage = async () => {
                         </span>
                       </div>
                     </div>
-                    <p className="mt-1 mb-2 text-sm">
-                      {employment.fields.description}
-                    </p>
+                    {employment.fields.description && (
+                      <MarkdownRender className="mt-1 mb-2 text-sm" content={employment.fields.description} />
+                    )}
                     {employment.fields.technologies && employment.fields.technologies?.length > 0 && (
                       <span className="block text-sm text-neutral-400">Technologies: {employment.fields.technologies.join(', ')}</span>
                     )}
