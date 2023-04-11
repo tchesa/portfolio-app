@@ -1,11 +1,27 @@
-import { Education, Employment } from "@/types/contentful"
+import { Education, Employment, EmploymentType, LocationType } from "@/types/contentful"
 import { createClient } from "contentful"
+import Image from "next/image"
 
 const classes = {
   sectionTitle: 'text-2xl pt-6',
   sectionList: 'flex flex-row px-6 pb-6 w-full',
   sectionListTitle: 'w-[400px] shrink-0',
   sectionListContent: 'grow pt-6',
+}
+
+const employmentTypeLabel: { [employmentType in EmploymentType]: string } = {
+  'contract': 'Contract',
+  'freelance': 'Freelance',
+  'fullTime': 'Full-time',
+  'internship': 'Internship',
+  'partTime': 'Part-time',
+  'selfEmployed': 'Self-employed'
+}
+
+const locationTypeLabel: { [locationType in LocationType]: string } = {
+  'hybrid': 'Hybrid',
+  'onSite': 'On-site',
+  'remote': 'Remote'
 }
 
 const ResumePage = async () => {
@@ -23,6 +39,20 @@ const ResumePage = async () => {
     }),
   ])
 
+  const renderLocationType = (locationType: LocationType | undefined) => {
+    if (locationType)
+      return locationTypeLabel[locationType]
+
+    return null
+  }
+
+  const renderEmploymentType = (employmentType: EmploymentType | undefined) => {
+    if (employmentType)
+      return employmentTypeLabel[employmentType]
+
+    return null
+  }
+
   return (
     <main className="py-4 container mx-auto">
       <div className="border"> {/* resume frame */}
@@ -37,9 +67,10 @@ const ResumePage = async () => {
               {employmentEntries.items.map(employment => (
                 <li key={employment.sys.id}>
                   <div>
-                    <div className="flex -ml-16">
+                    <div className="flex items-start -ml-16">
                       {employment.fields.companyLogo && (
-                        <img src={employment.fields.companyLogo.fields.file.url} alt={`${employment.fields.companyName || 'Company'} logo`} className="w-[48px] h-[48px] object-cover mr-4" />
+                        // <img src={employment.fields.companyLogo.fields.file.url} alt={`${employment.fields.companyName || 'Company'} logo`} className="w-[48px] h-[48px] object-cover mr-4" />
+                        <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'contain' }} className="mr-4 w-auto h-auto" />
                       )}
                       <div className="grow">
                         <div className="flex items-center">
@@ -53,12 +84,12 @@ const ResumePage = async () => {
                         <span className="block text-sm">
                           {employment.fields.companyName ? employment.fields.companyName : null}
                           {employment.fields.companyName && employment.fields.employmentType ? ' - ' : null}
-                          {employment.fields.employmentType ? employment.fields.employmentType : null}
+                          {renderEmploymentType(employment.fields.employmentType)}
                         </span>
                         <span className="block text-sm text-neutral-400">
                           {employment.fields.companyLocation ? employment.fields.companyLocation : null}
                           {employment.fields.companyLocation && employment.fields.locationType ? ' - ' : null}
-                          {employment.fields.locationType ? employment.fields.locationType : null}
+                          {renderLocationType(employment.fields.locationType)}
                         </span>
                       </div>
                     </div>

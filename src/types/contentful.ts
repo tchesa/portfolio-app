@@ -8,7 +8,7 @@ export type EmploymentType =
   | "internship"
   | "contract";
 
-export type locationType = "onSite" | "hybrid" | "remote";
+export type LocationType = "onSite" | "hybrid" | "remote";
 
 export type ContentfulMedia = {
   title: string;
@@ -36,7 +36,7 @@ export type Employment = {
   currentlyWorkingHere?: boolean;
   description?: string;
   technologies?: string[];
-  locationType?: locationType;
+  locationType?: LocationType;
 };
 
 export type Attachment = {
