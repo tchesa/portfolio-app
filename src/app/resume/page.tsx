@@ -54,7 +54,7 @@ const ResumePage = async () => {
   }
 
   return (
-    <main className="py-4 container mx-auto">
+    <main className="py-4 coverer mx-auto">
       <div className="border"> {/* resume frame */}
         <div className="p-6"> {/* profile section */}
           <h1 className="text-3xl">Cesar Antunes</h1>
@@ -67,10 +67,10 @@ const ResumePage = async () => {
               {employmentEntries.items.map(employment => (
                 <li key={employment.sys.id}>
                   <div>
-                    <div className="flex items-start -ml-16">
+                    <div className="flex items-start">
                       {employment.fields.companyLogo && (
                         // <img src={employment.fields.companyLogo.fields.file.url} alt={`${employment.fields.companyName || 'Company'} logo`} className="w-[48px] h-[48px] object-cover mr-4" />
-                        <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'contain' }} className="mr-4 w-auto h-auto" />
+                        <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto -ml-16" />
                       )}
                       <div className="grow">
                         <div className="flex items-center">
@@ -112,33 +112,41 @@ const ResumePage = async () => {
               {educationEntries.items.map(education => (
                 <li key={education.sys.id}>
                   <div>
-                    <div className="flex items-center">
-                      <h3 className="grow">
-                        {education.fields.degree ? education.fields.degree : null}
-                        {education.fields.degree && education.fields.fieldOfStudy ? ' - ' : null}
-                        {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
-                      </h3>
-                      <span className="block text-sm text-neutral-400">
-                        {education.fields.startDate ? education.fields.startDate : null}
-                        {education.fields.startDate && education.fields.endDate ? ' - ' : null}
-                        {education.fields.endDate ? education.fields.endDate : null}
-                      </span>
+                    <div className="flex items-start">
+                      {education.fields.schoolThumbnail && (
+                        <Image src={`https:${education.fields.schoolThumbnail.fields.file.url}`} alt={`${education.fields.school || 'School'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto -ml-16" />
+                      )}
+                      <div className="grow">
+                        <div className="flex items-center">
+
+                          <h3 className="grow">
+                            {education.fields.degree ? education.fields.degree : null}
+                            {education.fields.degree && education.fields.fieldOfStudy ? ' - ' : null}
+                            {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
+                          </h3>
+                          <span className="block text-sm text-neutral-400">
+                            {education.fields.startDate ? education.fields.startDate : null}
+                            {education.fields.startDate && education.fields.endDate ? ' - ' : null}
+                            {education.fields.endDate ? education.fields.endDate : null}
+                          </span>
+                        </div>
+                        <span className="block text-sm text-neutral-400">
+                          {education.fields.school ? education.fields.school : null}
+                          {education.fields.school && education.fields.schoolLocation ? ' - ' : null}
+                          {education.fields.schoolLocation ? education.fields.schoolLocation : null}
+                        </span>
+                      </div>
                     </div>
-                    <span className="block text-sm text-neutral-400">
-                      {education.fields.school ? education.fields.school : null}
-                      {education.fields.school && education.fields.schoolLocation ? ' - ' : null}
-                      {education.fields.schoolLocation ? education.fields.schoolLocation : null}
-                    </span>
                     {education.fields.attachments && education.fields.attachments.length > 0 && (
                       <>
                         <h4 className="mt-2 mb-2">Attachments</h4>
-                        <ul>
+                        <ul className="space-y-4">
                           {education.fields.attachments.map(attachment => (
                             <li key={attachment.sys.id}>
                               <div className="flex">
-                                {/* {attachment.fields.thumbnail && (
-                                  <img src={attachment.fields.thumbnail.fields.file.url} alt={`${attachment.fields.title || 'Company'} logo`} className="w-[106px] h-[60px] border rounded object-cover mr-4" />
-                                )} */}
+                                {attachment.fields.thumbnail && (
+                                  <Image src={`https:${attachment.fields.thumbnail.fields.file.url}`} alt={`${attachment.fields.title || 'Attachment'} logo`} width={106} height={60} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto border rounded object-cover" />
+                                )}
                                 <div>
                                   {attachment.fields.title && <h5 className="text-sm">{attachment.fields.title}</h5>}
                                   {attachment.fields.description && <span className="block text-sm text-neutral-400">{attachment.fields.description}</span>}

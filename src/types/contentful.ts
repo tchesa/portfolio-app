@@ -43,6 +43,7 @@ export type Attachment = {
   title?: string;
   description?: string;
   link?: string;
+  thumbnail?: Entry<ContentfulMedia>;
 };
 
 export type Education = {
@@ -53,4 +54,5 @@ export type Education = {
   endDate?: string;
   attachments?: Entry<Attachment>[];
   schoolLocation?: string;
+  schoolThumbnail?: Entry<ContentfulMedia>;
 };
