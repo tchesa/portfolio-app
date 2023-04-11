@@ -2,6 +2,7 @@ import MarkdownRender from "@/components/markdown-render"
 import { Education, Employment, EmploymentType, LocationType } from "@/types/contentful"
 import { createClient } from "contentful"
 import Image from "next/image"
+import SeparatorSpan from "./separator-span"
 
 const ResumePage = async () => {
   const client = createClient({
@@ -21,7 +22,7 @@ const ResumePage = async () => {
   const classes = {
     sectionTitle: 'text-2xl pt-6',
     sectionList: 'flex flex-row px-6 pb-6 w-full',
-    sectionListTitle: 'w-[400px] shrink-0',
+    sectionListTitle: 'w-[30%] min-w-[250px] shrink-0',
     sectionListContent: 'grow pt-6',
   }
 
@@ -68,7 +69,7 @@ const ResumePage = async () => {
       <div className="border"> {/* resume frame */}
         <div className="p-6"> {/* profile section */}
           <h1 className="text-3xl">Cesar Antunes</h1>
-          <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte - Minas Gerais, Brazil</span>
+          <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
         </div>
         <div className={classes.sectionList}> {/* experience section */}
           <h2 id="employment" className={[classes.sectionTitle, classes.sectionListTitle].join(' ')}>Employment</h2>
@@ -87,7 +88,7 @@ const ResumePage = async () => {
                           <h3 className="grow text-lg">{employment.fields.title || 'Untitled employment'}</h3>
                           <span className="block text-sm text-neutral-400">
                             {employment.fields.startDate ? dateFormatter(new Date(employment.fields.startDate)) : null}
-                            {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? ' - ' : null}
+                            {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
                             {employment.fields.currentlyWorkingHere
                               ? 'Current'
                               : employment.fields.endDate
@@ -98,12 +99,12 @@ const ResumePage = async () => {
                         </div>
                         <span className="block text-sm">
                           {employment.fields.companyName ? employment.fields.companyName : null}
-                          {employment.fields.companyName && employment.fields.employmentType ? ' - ' : null}
+                          {employment.fields.companyName && employment.fields.employmentType ? <SeparatorSpan /> : null}
                           {renderEmploymentType(employment.fields.employmentType)}
                         </span>
                         <span className="block text-sm text-neutral-400">
                           {employment.fields.companyLocation ? employment.fields.companyLocation : null}
-                          {employment.fields.companyLocation && employment.fields.locationType ? ' - ' : null}
+                          {employment.fields.companyLocation && employment.fields.locationType ? <SeparatorSpan /> : null}
                           {renderLocationType(employment.fields.locationType)}
                         </span>
                       </div>
@@ -136,25 +137,25 @@ const ResumePage = async () => {
 
                           <h3 className="grow">
                             {education.fields.degree ? education.fields.degree : null}
-                            {education.fields.degree && education.fields.fieldOfStudy ? ' - ' : null}
+                            {education.fields.degree && education.fields.fieldOfStudy ? <SeparatorSpan /> : null}
                             {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
                           </h3>
                           <span className="block text-sm text-neutral-400">
                             {education.fields.startDate ? dateFormatter(new Date(education.fields.startDate)) : null}
-                            {education.fields.startDate && education.fields.endDate ? ' - ' : null}
+                            {education.fields.startDate && education.fields.endDate ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
                             {education.fields.endDate ? dateFormatter(new Date(education.fields.endDate)) : null}
                           </span>
                         </div>
                         <span className="block text-sm text-neutral-400">
                           {education.fields.school ? education.fields.school : null}
-                          {education.fields.school && education.fields.schoolLocation ? ' - ' : null}
+                          {education.fields.school && education.fields.schoolLocation ? <SeparatorSpan /> : null}
                           {education.fields.schoolLocation ? education.fields.schoolLocation : null}
                         </span>
                       </div>
                     </div>
                     {education.fields.attachments && education.fields.attachments.length > 0 && (
                       <>
-                        <h4 className="mt-2 mb-2">Attachments</h4>
+                        <h4 className="mt-2 mb-2">Attachments:</h4>
                         <ul className="space-y-4">
                           {education.fields.attachments.map(attachment => (
                             <li key={attachment.sys.id}>
