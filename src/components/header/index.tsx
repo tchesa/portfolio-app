@@ -3,7 +3,7 @@ import Link from "next/link"
 const navItems = [
   {
     label: 'Resume',
-    href: '/'
+    href: '/resume'
   },
   {
     label: 'Contact',
@@ -14,7 +14,7 @@ const navItems = [
 const Header = () => {
   return (
     <header className="flex justify-between py-4 px-6">
-      <Link className="font-medium" href="/">Cesar Lima</Link>
+      <Link className="font-medium" href="/">tchesa</Link>
       <nav>
         <ul className="flex space-x-6">
           {navItems.map(item => (
