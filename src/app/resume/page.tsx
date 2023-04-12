@@ -3,6 +3,7 @@ import { Education, Employment, EmploymentType, LocationType } from "@/types/con
 import { createClient } from "contentful"
 import Image from "next/image"
 import SeparatorSpan from "./separator-span"
+import { FiExternalLink } from 'react-icons/fi'
 
 const ResumePage = async () => {
   const client = createClient({
@@ -20,8 +21,8 @@ const ResumePage = async () => {
   ])
 
   const classes = {
-    sectionTitle: 'text-2xl pt-6',
-    sectionList: 'flex flex-row px-6 pb-6 w-full',
+    sectionTitle: 'text-2xl pt-6 font-serif font-medium',
+    sectionList: 'md:flex px-6 pb-6 w-full',
     sectionListTitle: 'w-[30%] min-w-[250px] shrink-0',
     sectionListContent: 'grow pt-6',
   }
@@ -64,11 +65,26 @@ const ResumePage = async () => {
     return null
   }
 
+  const renderCompanyName = (companyName?: string, companyUrl?: string) => {
+    const name = companyName || 'Untitled company';
+
+    if (companyUrl) {
+      return (
+        <a className="inline-flex items-center text-neutral-400 hover:text-black" href={companyUrl} target="_blank">
+          <span className="text-black">{name}</span>
+          <FiExternalLink className="ml-1 " />
+        </a>
+      )
+    }
+
+    return <>{name}</>
+  }
+
   return (
     <main className="py-4 coverer mx-auto">
       <div className="border"> {/* resume frame */}
         <div className="p-6"> {/* profile section */}
-          <h1 className="text-3xl">Cesar Antunes</h1>
+          <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
           <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
         </div>
         <div className={classes.sectionList}> {/* experience section */}
@@ -81,11 +97,11 @@ const ResumePage = async () => {
                     <div className="flex items-start">
                       {employment.fields.companyLogo && (
                         // <img src={employment.fields.companyLogo.fields.file.url} alt={`${employment.fields.companyName || 'Company'} logo`} className="w-[48px] h-[48px] object-cover mr-4" />
-                        <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto -ml-16" />
+                        <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto md:-ml-16" />
                       )}
                       <div className="grow">
                         <div className="flex items-center">
-                          <h3 className="grow text-lg">{employment.fields.title || 'Untitled employment'}</h3>
+                          <h3 className="grow text-lg font-serif font-medium">{employment.fields.title || 'Untitled employment'}</h3>
                           <span className="block text-sm text-neutral-400">
                             {employment.fields.startDate ? dateFormatter(new Date(employment.fields.startDate)) : null}
                             {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
@@ -98,19 +114,19 @@ const ResumePage = async () => {
                           </span>
                         </div>
                         <span className="block text-sm">
-                          {employment.fields.companyName ? employment.fields.companyName : null}
-                          {employment.fields.companyName && employment.fields.employmentType ? <SeparatorSpan /> : null}
+                          {renderCompanyName(employment.fields.companyName, employment.fields.companyUrl)}
+                          {employment.fields.employmentType ? <SeparatorSpan /> : null}
                           {renderEmploymentType(employment.fields.employmentType)}
-                        </span>
-                        <span className="block text-sm text-neutral-400">
-                          {employment.fields.companyLocation ? employment.fields.companyLocation : null}
-                          {employment.fields.companyLocation && employment.fields.locationType ? <SeparatorSpan /> : null}
-                          {renderLocationType(employment.fields.locationType)}
                         </span>
                       </div>
                     </div>
+                    <span className="block mt-1 text-sm text-neutral-400">
+                      {employment.fields.companyLocation ? employment.fields.companyLocation : null}
+                      {employment.fields.companyLocation && employment.fields.locationType ? <SeparatorSpan /> : null}
+                      {renderLocationType(employment.fields.locationType)}
+                    </span>
                     {employment.fields.description && (
-                      <MarkdownRender className="mt-1 mb-2 text-sm" content={employment.fields.description} />
+                      <MarkdownRender className="pt-1 mb-2 text-sm" content={employment.fields.description} />
                     )}
                     {employment.fields.technologies && employment.fields.technologies?.length > 0 && (
                       <span className="block text-sm text-neutral-400">Technologies: {employment.fields.technologies.join(', ')}</span>
@@ -130,12 +146,12 @@ const ResumePage = async () => {
                   <div>
                     <div className="flex items-start">
                       {education.fields.schoolThumbnail && (
-                        <Image src={`https:${education.fields.schoolThumbnail.fields.file.url}`} alt={`${education.fields.school || 'School'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto -ml-16" />
+                        <Image src={`https:${education.fields.schoolThumbnail.fields.file.url}`} alt={`${education.fields.school || 'School'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto md:-ml-16" />
                       )}
                       <div className="grow">
                         <div className="flex items-center">
 
-                          <h3 className="grow">
+                          <h3 className="grow text-lg font-serif font-medium">
                             {education.fields.degree ? education.fields.degree : null}
                             {education.fields.degree && education.fields.fieldOfStudy ? <SeparatorSpan /> : null}
                             {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
@@ -157,19 +173,34 @@ const ResumePage = async () => {
                       <>
                         <h4 className="mt-2 mb-2">Attachments:</h4>
                         <ul className="space-y-4">
-                          {education.fields.attachments.map(attachment => (
-                            <li key={attachment.sys.id}>
+                          {education.fields.attachments.map(attachment => {
+                            const renderContent = () => (
                               <div className="flex">
                                 {attachment.fields.thumbnail && (
-                                  <Image src={`https:${attachment.fields.thumbnail.fields.file.url}`} alt={`${attachment.fields.title || 'Attachment'} logo`} width={106} height={60} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto border rounded object-cover" />
+                                  <Image src={`https:${attachment.fields.thumbnail.fields.file.url}`} alt={`${attachment.fields.title || 'Attachment'} logo`} width={106} height={60} style={{ objectFit: 'cover' }} className="mr-4 w-[106px] h-[60px] border rounded object-cover" />
                                 )}
                                 <div>
-                                  {attachment.fields.title && <h5 className="text-sm">{attachment.fields.title}</h5>}
+                                  {attachment.fields.title && (
+                                    <h5 className="text-sm inline-flex items-center">
+                                      <span className="text-black">{attachment.fields.title}</span>
+                                      {attachment.fields.link && <FiExternalLink className="ml-1" />}
+                                    </h5>
+                                  )}
                                   {attachment.fields.description && <span className="block text-sm text-neutral-400">{attachment.fields.description}</span>}
                                 </div>
                               </div>
-                            </li>
-                          ))}
+                            )
+
+                            return (
+                              <li key={attachment.sys.id}>
+                                {attachment.fields.link ? (
+                                  <a className="text-neutral-400 hover:text-black" href={attachment.fields.link} target="_blank">
+                                    {renderContent()}
+                                  </a>
+                                ) : renderContent()}
+                              </li>
+                            )
+                          })}
                         </ul>
                       </>
                     )}
