@@ -83,7 +83,7 @@ const ResumePage = async () => {
   return (
     <main className="py-4 container mx-auto">
       <div className="strong-border mb-20"> {/* resume frame */}
-        <article>
+        <article className="bg-white">
           <div className="p-6"> {/* profile section */}
             <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
             <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>

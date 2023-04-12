@@ -12,3 +12,7 @@
   border: 6px solid #10100e;
   box-shadow: 12px 12px 0px #10100e;
 }
+
+body {
+  background-color: #ffffe3;
+}
