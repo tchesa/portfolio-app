@@ -10,9 +10,13 @@ type Props = PropsWithChildren<{
 
 const FormElement = ({ children, label, htmlFor, error }: Props) => (
   <div>
-    <label className="block text-lg font-serif font-medium" htmlFor={htmlFor}>{label}</label>
+    <label className="block text-lg font-serif font-medium" htmlFor={htmlFor}>
+      {label}
+    </label>
     {children}
-    <span className="mt-0.5 block text-sm text-red-700 min-h-[20px]">{error}</span>
+    <span className="mt-0.5 block text-sm text-orange-700 min-h-[20px]">
+      {error}
+    </span>
   </div>
 )
 
