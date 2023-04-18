@@ -81,7 +81,7 @@ const ResumePage = async () => {
   }
 
   return (
-    <main className="py-4 container mx-auto">
+    <main className="py-4 container mx-auto px-8">
       <div className="strong-border mb-20"> {/* resume frame */}
         <article className="bg-white">
           <div className="p-6"> {/* profile section */}

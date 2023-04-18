@@ -13,6 +13,10 @@
   box-shadow: 12px 12px 0px #10100e;
 }
 
+.shadow-2 {
+  box-shadow: 2px 2px 0px #10100e;
+}
+
 body {
   background-color: #ffffe3;
 }
