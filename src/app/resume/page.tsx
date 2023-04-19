@@ -88,8 +88,8 @@ const ResumePage = async () => {
             <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
             <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
           </div>
-          <div className="md:flex px-8 pb-8 w-full items-start"> {/* experience section */}
-            <h2 id="employment" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 sticky top-0">Employment</h2>
+          <div className="md:flex px-8 pb-8 w-full md:items-start"> {/* experience section */}
+            <h2 id="employment" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 md:sticky md:top-0">Employment</h2>
             <div className="grow pt-4">
               <ul className="space-y-5">
                 {employmentEntries.items.sort((a, b) => sortByDate(new Date(a.fields.endDate || new Date()), new Date(b.fields.endDate || new Date()))).map(employment => (
@@ -138,8 +138,8 @@ const ResumePage = async () => {
               </ul>
             </div>
           </div>
-          <div className="md:flex px-8 pb-8 w-full items-start"> {/* education section */}
-            <h2 id="education" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 sticky top-0">Education</h2>
+          <div className="md:flex px-8 pb-8 w-full md:items-start"> {/* education section */}
+            <h2 id="education" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 md:sticky md:top-0">Education</h2>
             <div className="grow pt-4">
               <ul className="space-y-5">
                 {educationEntries.items.map(education => (
