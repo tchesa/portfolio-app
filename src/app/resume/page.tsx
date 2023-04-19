@@ -79,7 +79,7 @@ const ResumePage = async () => {
       <div className="strong-border mb-4 resume-outside"> {/* resume frame */}
         <article className="bg-white">
           <div className="p-8"> {/* profile section */}
-            <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
+            <h1 className="text-3xl font-medium font-serif">Cesar Lima</h1>
             <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
           </div>
           <div className="md:flex px-8 pb-8 w-full md:items-start"> {/* experience section */}

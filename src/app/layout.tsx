@@ -3,7 +3,7 @@ import { Bitter, Lato } from 'next/font/google'
 import './globals.css'
 
 export const metadata = {
-  title: 'Cesar Antunes',
+  title: 'Cesar Lima',
   description: 'Welcome to my portolio website',
 }
 
