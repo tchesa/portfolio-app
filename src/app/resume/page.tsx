@@ -4,6 +4,7 @@ import { createClient } from "contentful"
 import Image from "next/image"
 import SeparatorSpan from "./separator-span"
 import { FiExternalLink } from 'react-icons/fi'
+import PrintButton from "@/components/print-button"
 
 const ResumePage = async () => {
   const client = createClient({
@@ -19,13 +20,6 @@ const ResumePage = async () => {
       content_type: 'education'
     }),
   ])
-
-  const classes = {
-    sectionTitle: 'text-2xl pt-6 font-serif font-medium',
-    sectionList: 'md:flex px-10 pb-8 w-full',
-    sectionListTitle: 'w-[30%] min-w-[250px] shrink-0',
-    sectionListContent: 'grow pt-6',
-  }
 
   const employmentTypeLabel: { [employmentType in EmploymentType]: string } = {
     'contract': 'Contract',
@@ -81,9 +75,9 @@ const ResumePage = async () => {
   }
 
   return (
-    <main className="py-4 container mx-auto px-8">
-      <div className="strong-border mb-20"> {/* resume frame */}
-        <article className="bg-white">
+    <main className="py-4 container mx-auto px-8 mb-20 resume-outside">
+      <div className="strong-border mb-4 resume-outside"> {/* resume frame */}
+        <article className="bg-white" id="sheet">
           <div className="p-8"> {/* profile section */}
             <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
             <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
@@ -97,8 +91,15 @@ const ResumePage = async () => {
                     <div>
                       <div className="flex items-start">
                         {employment.fields.companyLogo && (
-                          // <img src={employment.fields.companyLogo.fields.file.url} alt={`${employment.fields.companyName || 'Company'} logo`} className="w-[48px] h-[48px] object-cover mr-4" />
-                          <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto md:-ml-16" />
+                          <Image
+                            src={`https:${employment.fields.companyLogo.fields.file.url}`}
+                            alt={`${employment.fields.companyName || 'Company'} logo`}
+                            width={48}
+                            height={48}
+                            style={{ objectFit: 'cover' }}
+                            className="mr-4 w-auto h-auto md:-ml-16"
+                            id={employment.fields.companyLogo.sys.id}
+                          />
                         )}
                         <div className="grow">
                           <div className="flex items-start">
@@ -147,7 +148,15 @@ const ResumePage = async () => {
                     <div>
                       <div className="flex items-start">
                         {education.fields.schoolThumbnail && (
-                          <Image src={`https:${education.fields.schoolThumbnail.fields.file.url}`} alt={`${education.fields.school || 'School'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto md:-ml-16" />
+                          <Image
+                            src={`https:${education.fields.schoolThumbnail.fields.file.url}`}
+                            alt={`${education.fields.school || 'School'} logo`}
+                            width={48}
+                            height={48}
+                            style={{ objectFit: 'cover' }}
+                            className="mr-4 w-auto h-auto md:-ml-16"
+                            id={education.fields.schoolThumbnail.sys.id}
+                          />
                         )}
                         <div className="grow">
                           <div className="flex items-start">
@@ -177,7 +186,14 @@ const ResumePage = async () => {
                               const renderContent = () => (
                                 <div className="flex">
                                   {attachment.fields.thumbnail && (
-                                    <Image src={`https:${attachment.fields.thumbnail.fields.file.url}`} alt={`${attachment.fields.title || 'Attachment'} logo`} width={106} height={60} className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0" />
+                                    <Image
+                                      src={`https:${attachment.fields.thumbnail.fields.file.url}`}
+                                      alt={`${attachment.fields.title || 'Attachment'} logo`}
+                                      width={106}
+                                      height={60}
+                                      className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0"
+                                      id={attachment.fields.thumbnail.sys.id}
+                                    />
                                   )}
                                   <div>
                                     {attachment.fields.title && (
@@ -212,6 +228,9 @@ const ResumePage = async () => {
             </div>
           </div>
         </article>
+      </div>
+      <div className="text-center mt-8 print-container">
+        <PrintButton>Print resume</PrintButton>
       </div>
     </main>
   )
