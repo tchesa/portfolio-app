@@ -77,7 +77,7 @@ const ResumePage = async () => {
   return (
     <main className="py-4 container mx-auto px-8 mb-20 resume-outside">
       <div className="strong-border mb-4 resume-outside"> {/* resume frame */}
-        <article className="bg-white" id="sheet">
+        <article className="bg-white">
           <div className="p-8"> {/* profile section */}
             <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
             <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
@@ -98,7 +98,6 @@ const ResumePage = async () => {
                             height={48}
                             style={{ objectFit: 'cover' }}
                             className="mr-4 w-auto h-auto md:-ml-16"
-                            id={employment.fields.companyLogo.sys.id}
                           />
                         )}
                         <div className="grow">
@@ -155,7 +154,6 @@ const ResumePage = async () => {
                             height={48}
                             style={{ objectFit: 'cover' }}
                             className="mr-4 w-auto h-auto md:-ml-16"
-                            id={education.fields.schoolThumbnail.sys.id}
                           />
                         )}
                         <div className="grow">
@@ -192,7 +190,6 @@ const ResumePage = async () => {
                                       width={106}
                                       height={60}
                                       className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0"
-                                      id={attachment.fields.thumbnail.sys.id}
                                     />
                                   )}
                                   <div>
