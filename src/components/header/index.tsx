@@ -5,7 +5,7 @@ import { FiGithub, FiTwitter } from "react-icons/fi"
 const Header = () => {
   return (
     <header className="flex justify-between py-4 relative container mx-auto px-8">
-      <Link className="font-medium font-serif text-3xl text-white hover:underline" href="/">{"<>tchesa.</>"}</Link>
+      <Link className="font-medium font-serif text-3xl text-white hover:underline" href="/">{"<>cesar.</>"}</Link>
       <nav>
         <ul className="flex space-x-6 items-center">
           <li>
