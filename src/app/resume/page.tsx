@@ -4,6 +4,7 @@ import { createClient } from "contentful"
 import Image from "next/image"
 import SeparatorSpan from "./separator-span"
 import { FiExternalLink } from 'react-icons/fi'
+import PrintButton from "@/components/print-button"
 
 const ResumePage = async () => {
   const client = createClient({
@@ -19,13 +20,6 @@ const ResumePage = async () => {
       content_type: 'education'
     }),
   ])
-
-  const classes = {
-    sectionTitle: 'text-2xl pt-6 font-serif font-medium',
-    sectionList: 'md:flex px-10 pb-8 w-full',
-    sectionListTitle: 'w-[30%] min-w-[250px] shrink-0',
-    sectionListContent: 'grow pt-6',
-  }
 
   const employmentTypeLabel: { [employmentType in EmploymentType]: string } = {
     'contract': 'Contract',
@@ -81,9 +75,9 @@ const ResumePage = async () => {
   }
 
   return (
-    <main className="py-4 container mx-auto px-8">
-      <div className="strong-border mb-20"> {/* resume frame */}
-        <article className="bg-white">
+    <main className="py-4 container mx-auto px-8 mb-20">
+      <div className="strong-border mb-4"> {/* resume frame */}
+        <article className="bg-white" id="sheet">
           <div className="p-8"> {/* profile section */}
             <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
             <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
@@ -212,6 +206,9 @@ const ResumePage = async () => {
             </div>
           </div>
         </article>
+      </div>
+      <div className="text-center mt-8">
+        <PrintButton elementId="sheet">Print resume</PrintButton>
       </div>
     </main>
   )
