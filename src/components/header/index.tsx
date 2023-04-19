@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Shape1 } from "../shapes"
-import { FiGithub } from "react-icons/fi"
+import { FiGithub, FiTwitter } from "react-icons/fi"
 
 const navItems = [
   {
@@ -27,6 +27,11 @@ const Header = () => {
           <li>
             <Link className="text-orange-900" href="https://github.com/tchesa" target="_blank">
               <FiGithub className="text-2xl" />
+            </Link>
+          </li>
+          <li>
+            <Link className="text-orange-900" href="https://twitter.com/tchesa" target="_blank">
+              <FiTwitter className="text-2xl" />
             </Link>
           </li>
         </ul>
