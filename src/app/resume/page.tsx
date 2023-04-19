@@ -74,6 +74,18 @@ const ResumePage = async () => {
     return <>{name}</>
   }
 
+  const printIgnoreElements = [
+    ...(employmentEntries.items || []).filter(e => e.fields.companyLogo).map(e => e.fields.companyLogo?.sys.id || ''),
+    ...(educationEntries.items || []).filter(e => e.fields.schoolThumbnail).map(e => e.fields.schoolThumbnail?.sys.id || ''),
+    ...(educationEntries.items || []).filter(e => (e.fields.attachments || []).length > 0).reduce<string[]>((ids, e) => {
+
+      return [
+        ...ids,
+        ...(e.fields.attachments || []).filter(a => a.fields.thumbnail).map(a => a.fields.thumbnail?.sys.id || '')
+      ]
+    }, []),
+  ]
+
   return (
     <main className="py-4 container mx-auto px-8 mb-20">
       <div className="strong-border mb-4"> {/* resume frame */}
@@ -91,8 +103,15 @@ const ResumePage = async () => {
                     <div>
                       <div className="flex items-start">
                         {employment.fields.companyLogo && (
-                          // <img src={employment.fields.companyLogo.fields.file.url} alt={`${employment.fields.companyName || 'Company'} logo`} className="w-[48px] h-[48px] object-cover mr-4" />
-                          <Image src={`https:${employment.fields.companyLogo.fields.file.url}`} alt={`${employment.fields.companyName || 'Company'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto md:-ml-16" />
+                          <Image
+                            src={`https:${employment.fields.companyLogo.fields.file.url}`}
+                            alt={`${employment.fields.companyName || 'Company'} logo`}
+                            width={48}
+                            height={48}
+                            style={{ objectFit: 'cover' }}
+                            className="mr-4 w-auto h-auto md:-ml-16"
+                            id={employment.fields.companyLogo.sys.id}
+                          />
                         )}
                         <div className="grow">
                           <div className="flex items-start">
@@ -141,7 +160,15 @@ const ResumePage = async () => {
                     <div>
                       <div className="flex items-start">
                         {education.fields.schoolThumbnail && (
-                          <Image src={`https:${education.fields.schoolThumbnail.fields.file.url}`} alt={`${education.fields.school || 'School'} logo`} width={48} height={48} style={{ objectFit: 'cover' }} className="mr-4 w-auto h-auto md:-ml-16" />
+                          <Image
+                            src={`https:${education.fields.schoolThumbnail.fields.file.url}`}
+                            alt={`${education.fields.school || 'School'} logo`}
+                            width={48}
+                            height={48}
+                            style={{ objectFit: 'cover' }}
+                            className="mr-4 w-auto h-auto md:-ml-16"
+                            id={education.fields.schoolThumbnail.sys.id}
+                          />
                         )}
                         <div className="grow">
                           <div className="flex items-start">
@@ -171,7 +198,14 @@ const ResumePage = async () => {
                               const renderContent = () => (
                                 <div className="flex">
                                   {attachment.fields.thumbnail && (
-                                    <Image src={`https:${attachment.fields.thumbnail.fields.file.url}`} alt={`${attachment.fields.title || 'Attachment'} logo`} width={106} height={60} className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0" />
+                                    <Image
+                                      src={`https:${attachment.fields.thumbnail.fields.file.url}`}
+                                      alt={`${attachment.fields.title || 'Attachment'} logo`}
+                                      width={106}
+                                      height={60}
+                                      className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0"
+                                      id={attachment.fields.thumbnail.sys.id}
+                                    />
                                   )}
                                   <div>
                                     {attachment.fields.title && (
@@ -208,7 +242,7 @@ const ResumePage = async () => {
         </article>
       </div>
       <div className="text-center mt-8">
-        <PrintButton elementId="sheet">Print resume</PrintButton>
+        <PrintButton elementId="sheet" ignoreElements={printIgnoreElements}>Print resume</PrintButton>
       </div>
     </main>
   )
