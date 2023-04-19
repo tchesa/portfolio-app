@@ -46,7 +46,12 @@ const SendEmailForm = ({ className }: Props) => {
     <form className={className} onSubmit={handleSubmit(onSubmit)}>
       <Input label="Name" error={errors.name} {...register('name')} />
       <Input label="Email" error={errors.email} {...register('email')} />
-      <TextArea label="Message" error={errors.message} {...register('message')} />
+      <TextArea
+        label="Message"
+        placeholder="Be as descriptive as possible"
+        error={errors.message}
+        {...register('message')}
+      />
       <div className="text-center">
         <Button className="mt-4 min-w-[200px]" disabled={sending}>Send</Button>
       </div>
