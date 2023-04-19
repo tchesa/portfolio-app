@@ -3,7 +3,7 @@ import { Education, Employment, EmploymentType, LocationType } from "@/types/con
 import { createClient } from "contentful"
 import Image from "next/image"
 import SeparatorSpan from "./separator-span"
-import { FiExternalLink } from 'react-icons/fi'
+import { FiExternalLink, FiPrinter } from 'react-icons/fi'
 import PrintButton from "@/components/print-button"
 
 const ResumePage = async () => {
@@ -227,7 +227,7 @@ const ResumePage = async () => {
         </article>
       </div>
       <div className="text-center mt-8 print-container">
-        <PrintButton>Print resume</PrintButton>
+        <PrintButton><FiPrinter className="inline mr-2" />Print resume</PrintButton>
       </div>
     </main>
   )

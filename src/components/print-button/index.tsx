@@ -5,16 +5,15 @@ import { ButtonHTMLAttributes, useEffect } from "react"
 
 type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type'>
 
+const elementQuery = 'header, .resume-outside, .print-container'
+const printHideClass = 'print-hidden'
+
 const hideElements = () => {
-  document.querySelector('header')?.classList.add('print-hidden');
-  document.querySelectorAll('.resume-outside').forEach(element => element.classList.add('print-hidden'))
-  document.querySelector('.print-container')?.classList.add('print-hidden');
+  document.querySelectorAll(elementQuery).forEach(element => element.classList.add(printHideClass))
 }
 
 const showElements = () => {
-  document.querySelector('header')?.classList.remove('print-hidden');
-  document.querySelectorAll('.resume-outside').forEach(element => element.classList.remove('print-hidden'))
-  document.querySelector('.print-container')?.classList.remove('print-hidden');
+  document.querySelectorAll(elementQuery).forEach(element => element.classList.remove(printHideClass))
 }
 
 const PrintButton = ({ children, ...buttonProps }: Props) => {

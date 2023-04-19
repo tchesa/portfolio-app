@@ -34,3 +34,7 @@ header.print-hidden,
   width: 100%;
   max-width: unset;
 }
+
+a:focus-visible {
+  @apply outline-orange-700 outline-2 border-orange-700;
+}
