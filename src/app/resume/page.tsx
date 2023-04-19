@@ -74,21 +74,9 @@ const ResumePage = async () => {
     return <>{name}</>
   }
 
-  const printIgnoreElements = [
-    ...(employmentEntries.items || []).filter(e => e.fields.companyLogo).map(e => e.fields.companyLogo?.sys.id || ''),
-    ...(educationEntries.items || []).filter(e => e.fields.schoolThumbnail).map(e => e.fields.schoolThumbnail?.sys.id || ''),
-    ...(educationEntries.items || []).filter(e => (e.fields.attachments || []).length > 0).reduce<string[]>((ids, e) => {
-
-      return [
-        ...ids,
-        ...(e.fields.attachments || []).filter(a => a.fields.thumbnail).map(a => a.fields.thumbnail?.sys.id || '')
-      ]
-    }, []),
-  ]
-
   return (
-    <main className="py-4 container mx-auto px-8 mb-20">
-      <div className="strong-border mb-4"> {/* resume frame */}
+    <main className="py-4 container mx-auto px-8 mb-20 resume-outside">
+      <div className="strong-border mb-4 resume-outside"> {/* resume frame */}
         <article className="bg-white" id="sheet">
           <div className="p-8"> {/* profile section */}
             <h1 className="text-3xl font-medium font-serif">Cesar Antunes</h1>
@@ -241,8 +229,8 @@ const ResumePage = async () => {
           </div>
         </article>
       </div>
-      <div className="text-center mt-8">
-        <PrintButton elementId="sheet" ignoreElements={printIgnoreElements}>Print resume</PrintButton>
+      <div className="text-center mt-8 print-container">
+        <PrintButton>Print resume</PrintButton>
       </div>
     </main>
   )

@@ -1,22 +1,35 @@
 'use client'
 
 import Button from "@/components/form/ui/button"
-import { ButtonHTMLAttributes } from "react"
+import { ButtonHTMLAttributes, useEffect } from "react"
 
-type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type'> & {
-  elementId: string,
-  ignoreElements?: string[]
+type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'type'>
+
+const hideElements = () => {
+  document.querySelector('header')?.classList.add('print-hidden');
+  document.querySelectorAll('.resume-outside').forEach(element => element.classList.add('print-hidden'))
+  document.querySelector('.print-container')?.classList.add('print-hidden');
 }
 
-const PrintButton = ({ children, elementId, ignoreElements, ...buttonProps }: Props) => {
+const showElements = () => {
+  document.querySelector('header')?.classList.remove('print-hidden');
+  document.querySelectorAll('.resume-outside').forEach(element => element.classList.remove('print-hidden'))
+  document.querySelector('.print-container')?.classList.remove('print-hidden');
+}
+
+const PrintButton = ({ children, ...buttonProps }: Props) => {
+  useEffect(() => {
+    window.addEventListener('beforeprint', hideElements);
+    window.addEventListener('afterprint', showElements);
+
+    return () => {
+      window.removeEventListener('beforeprint', hideElements);
+      window.removeEventListener('afterprint', showElements);
+    }
+  }, [])
+
   const handleClick = async () => {
-    const print = (await import("print-js")).default
-    print({
-      printable: elementId,
-      type: "html",
-      targetStyles: ["*"],
-      ignoreElements,
-    });
+    print();
   }
 
   return (
