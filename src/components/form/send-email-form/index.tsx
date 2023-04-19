@@ -20,7 +20,7 @@ type Props = {
   className?: string
 }
 
-const SendEmailForm = ({ className, ...props }: Props) => {
+const SendEmailForm = ({ className }: Props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema)
   })
