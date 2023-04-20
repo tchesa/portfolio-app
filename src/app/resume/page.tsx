@@ -64,7 +64,7 @@ const ResumePage = async () => {
 
     if (companyUrl) {
       return (
-        <a className="inline-flex items-center text-neutral-400 hover:text-black" href={companyUrl} target="_blank">
+        <a className="inline-flex items-center text-neutral-500 hover:text-black" href={companyUrl} target="_blank">
           <span className="text-black">{name}</span>
           <FiExternalLink className="ml-1 " />
         </a>
@@ -80,7 +80,7 @@ const ResumePage = async () => {
         <article className="bg-white">
           <div className="p-8"> {/* profile section */}
             <h1 className="text-3xl font-medium font-serif">Cesar Lima</h1>
-            <span className="block text-sm text-neutral-400">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
+            <span className="block text-sm text-neutral-500">Frontend Engineer in Belo Horizonte<SeparatorSpan />Minas Gerais, Brazil</span>
           </div>
           <div className="md:flex px-8 pb-8 w-full md:items-start"> {/* experience section */}
             <h2 id="employment" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 md:sticky md:top-0">Employment</h2>
@@ -103,7 +103,7 @@ const ResumePage = async () => {
                         <div className="grow">
                           <div className="flex items-start">
                             <h3 className="grow text-lg font-serif font-medium">{employment.fields.title || 'Untitled employment'}</h3>
-                            <span className="block text-sm text-neutral-400 whitespace-nowrap leading-7 ml-4">
+                            <span className="block text-sm text-neutral-500 whitespace-nowrap leading-7 ml-4">
                               {employment.fields.startDate ? dateFormatter(new Date(employment.fields.startDate)) : null}
                               {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
                               {employment.fields.currentlyWorkingHere
@@ -121,7 +121,7 @@ const ResumePage = async () => {
                           </span>
                         </div>
                       </div>
-                      <span className="block mt-1 text-sm text-neutral-400">
+                      <span className="block mt-1 text-sm text-neutral-500">
                         {employment.fields.companyLocation ? employment.fields.companyLocation : null}
                         {employment.fields.companyLocation && employment.fields.locationType ? <SeparatorSpan /> : null}
                         {renderLocationType(employment.fields.locationType)}
@@ -130,7 +130,7 @@ const ResumePage = async () => {
                         <MarkdownRender className="pt-1 mb-2 text-sm" content={employment.fields.description} />
                       )}
                       {employment.fields.technologies && employment.fields.technologies?.length > 0 && (
-                        <span className="block text-sm text-neutral-400">Technologies: {employment.fields.technologies.join(', ')}</span>
+                        <span className="block text-sm text-neutral-500">Technologies: {employment.fields.technologies.join(', ')}</span>
                       )}
                     </div>
                   </li>
@@ -163,13 +163,13 @@ const ResumePage = async () => {
                               {education.fields.degree && education.fields.fieldOfStudy ? <SeparatorSpan /> : null}
                               {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
                             </h3>
-                            <span className="block text-sm text-neutral-400 whitespace-nowrap leading-7 ml-4">
+                            <span className="block text-sm text-neutral-500 whitespace-nowrap leading-7 ml-4">
                               {education.fields.startDate ? dateFormatter(new Date(education.fields.startDate)) : null}
                               {education.fields.startDate && education.fields.endDate ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
                               {education.fields.endDate ? dateFormatter(new Date(education.fields.endDate)) : null}
                             </span>
                           </div>
-                          <span className="block text-sm text-neutral-400">
+                          <span className="block text-sm text-neutral-500">
                             {education.fields.school ? education.fields.school : null}
                             {education.fields.school && education.fields.schoolLocation ? <SeparatorSpan /> : null}
                             {education.fields.schoolLocation ? education.fields.schoolLocation : null}
@@ -199,7 +199,7 @@ const ResumePage = async () => {
                                         {attachment.fields.link && <FiExternalLink className="ml-1 shrink-0" />}
                                       </h5>
                                     )}
-                                    {attachment.fields.description && <span className="block text-sm text-neutral-400">{attachment.fields.description}</span>}
+                                    {attachment.fields.description && <span className="block text-sm text-neutral-500">{attachment.fields.description}</span>}
                                   </div>
                                 </div>
                               )
@@ -207,7 +207,7 @@ const ResumePage = async () => {
                               return (
                                 <li key={attachment.sys.id}>
                                   {attachment.fields.link ? (
-                                    <a className="text-neutral-400 hover:text-black" href={attachment.fields.link} target="_blank">
+                                    <a className="text-neutral-500 hover:text-black" href={attachment.fields.link} target="_blank">
                                       {renderContent()}
                                     </a>
                                   ) : renderContent()}
