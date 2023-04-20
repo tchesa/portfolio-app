@@ -1,5 +1,6 @@
 import Button from "@/components/form/ui/button";
 import RepositoryCard from "@/components/repository-card";
+import PortfolioUpdate from "@/components/shapes/portfolio-update";
 import { Repository } from "@/types/github";
 import Link from "next/link";
 import { FiMail } from 'react-icons/fi'
@@ -656,17 +657,18 @@ export default async function Home() {
   return (
     <main className="py-4 container mx-auto px-8 mb-20 resume-outside">
       <div className="pt-[120px] max-w-[500px]">
-        <span className="text-xl">Hi there! I&apos;m</span>
-        <span className="font-serif text-5xl text-orange-900 block">Cesar Lima,</span>
-        <span className="text-xl">a web developer with expertise in building robust and scalable web applications. With expertise in React, Redux, NextJS, Typescript, CSS, Sass, Tailwind CSS, I&apos;m able to craft custom solutions that meet the unique needs of each project.</span>
+        <span className="text-xl bg-orange-50">Hi there! I&apos;m</span>
+        <span className="font-serif text-5xl text-orange-900 block" style={{ textShadow: '2px 2px rgb(255 247 237)' }}>Cesar Lima,</span>
+        <span className="text-xl bg-orange-50">a web developer with expertise in building robust and scalable web applications. With expertise in React, Redux, NextJS, Typescript, CSS, Sass, Tailwind CSS, I&apos;m able to craft custom solutions that meet the unique needs of each project.</span>
       </div>
+      <PortfolioUpdate width={600} height={600} className="hidden md:block absolute top-[10px] right-0 -z-10" />
       <div className="mt-10 text-center">
-        {/* <Link href="/contact"> */}
-        <Button type="button"><FiMail className="inline mr-2" />Send me a message</Button>
-        {/* </Link> */}
+        <Link href="/contact">
+          <Button type="button"><FiMail className="inline mr-2" />Send me a message</Button>
+        </Link>
       </div>
       <h2 className="font-serif font-normal text-2xl text-orange-900 mt-10 mb-2">Pinned repositories</h2>
-      <ul className="grid grid-cols-3 xl:grid-cols-6 gap-4 items-stretch">
+      <ul className="grid grid-cols-3 2xl:grid-cols-6 gap-4 items-stretch">
         {repositories.map(repository => (
           <li key={repository.id}>
             <RepositoryCard className="h-full" repository={repository} />
