@@ -86,55 +86,64 @@ const ResumePage = async () => {
             <h2 id="employment" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 md:sticky md:top-0">Employment</h2>
             <div className="grow pt-4">
               <ul className="space-y-5">
-                {employmentEntries.items.sort((a, b) => sortByDate(new Date(a.fields.endDate || new Date()), new Date(b.fields.endDate || new Date()))).map(employment => (
-                  <li key={employment.sys.id}>
-                    <div>
-                      <div className="flex items-start">
-                        {employment.fields.companyLogo && (
-                          <Image
-                            src={`https:${employment.fields.companyLogo.fields.file.url}`}
-                            alt={`${employment.fields.companyName || 'Company'} logo`}
-                            width={48}
-                            height={48}
-                            style={{ objectFit: 'cover' }}
-                            className="mr-4 w-auto h-auto md:-ml-16"
-                          />
-                        )}
-                        <div className="grow">
-                          <div className="flex items-start">
-                            <h3 className="grow text-lg font-serif font-medium">{employment.fields.title || 'Untitled employment'}</h3>
-                            <span className="block text-sm text-neutral-500 whitespace-nowrap leading-7 ml-4">
-                              {employment.fields.startDate ? dateFormatter(new Date(employment.fields.startDate)) : null}
-                              {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
-                              {employment.fields.currentlyWorkingHere
-                                ? 'Current'
-                                : employment.fields.endDate
-                                  ? dateFormatter(new Date(employment.fields.endDate))
-                                  : null
-                              }
+                {employmentEntries.items.sort((a, b) => sortByDate(new Date(a.fields.endDate || new Date()), new Date(b.fields.endDate || new Date()))).map(employment => {
+                  const period = (
+                    <span className="block text-sm text-neutral-500 whitespace-nowrap leading-7 md:ml-4">
+                      {employment.fields.startDate ? dateFormatter(new Date(employment.fields.startDate)) : null}
+                      {employment.fields.startDate && (employment.fields.endDate || employment.fields.currentlyWorkingHere) ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
+                      {employment.fields.currentlyWorkingHere
+                        ? 'Current'
+                        : employment.fields.endDate
+                          ? dateFormatter(new Date(employment.fields.endDate))
+                          : null
+                      }
+                    </span>
+                  )
+
+                  return (
+                    <li key={employment.sys.id}>
+                      <div>
+                        <div className="flex items-start">
+                          {employment.fields.companyLogo && (
+                            <Image
+                              src={`https:${employment.fields.companyLogo.fields.file.url}`}
+                              alt={`${employment.fields.companyName || 'Company'} logo`}
+                              width={48}
+                              height={48}
+                              style={{ objectFit: 'cover' }}
+                              className="mr-4 w-auto h-auto md:-ml-16"
+                            />
+                          )}
+                          <div className="grow">
+                            <div className="flex items-start">
+                              <h3 className="grow text-lg font-serif font-medium">{employment.fields.title || 'Untitled employment'}</h3>
+                              <div className="hidden md:block">
+                                {period}
+                              </div>
+                            </div>
+                            <span className="block text-sm">
+                              {renderCompanyName(employment.fields.companyName, employment.fields.companyUrl)}
+                              {employment.fields.employmentType ? <SeparatorSpan /> : null}
+                              {renderEmploymentType(employment.fields.employmentType)}
                             </span>
+                            <div className="block md:hidden">{period}</div>
                           </div>
-                          <span className="block text-sm">
-                            {renderCompanyName(employment.fields.companyName, employment.fields.companyUrl)}
-                            {employment.fields.employmentType ? <SeparatorSpan /> : null}
-                            {renderEmploymentType(employment.fields.employmentType)}
-                          </span>
                         </div>
+                        <span className="block mt-1 text-sm text-neutral-500">
+                          {employment.fields.companyLocation ? employment.fields.companyLocation : null}
+                          {employment.fields.companyLocation && employment.fields.locationType ? <SeparatorSpan /> : null}
+                          {renderLocationType(employment.fields.locationType)}
+                        </span>
+                        {employment.fields.description && (
+                          <MarkdownRender className="pt-1 mb-2 text-sm" content={employment.fields.description} />
+                        )}
+                        {employment.fields.technologies && employment.fields.technologies?.length > 0 && (
+                          <span className="block text-sm text-neutral-500">Technologies: {employment.fields.technologies.join(', ')}</span>
+                        )}
                       </div>
-                      <span className="block mt-1 text-sm text-neutral-500">
-                        {employment.fields.companyLocation ? employment.fields.companyLocation : null}
-                        {employment.fields.companyLocation && employment.fields.locationType ? <SeparatorSpan /> : null}
-                        {renderLocationType(employment.fields.locationType)}
-                      </span>
-                      {employment.fields.description && (
-                        <MarkdownRender className="pt-1 mb-2 text-sm" content={employment.fields.description} />
-                      )}
-                      {employment.fields.technologies && employment.fields.technologies?.length > 0 && (
-                        <span className="block text-sm text-neutral-500">Technologies: {employment.fields.technologies.join(', ')}</span>
-                      )}
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </div>
@@ -142,85 +151,96 @@ const ResumePage = async () => {
             <h2 id="education" className="text-2xl pt-4 font-serif font-medium w-[30%] min-w-[250px] shrink-0 md:sticky md:top-0">Education</h2>
             <div className="grow pt-4">
               <ul className="space-y-5">
-                {educationEntries.items.map(education => (
-                  <li key={education.sys.id}>
-                    <div>
-                      <div className="flex items-start">
-                        {education.fields.schoolThumbnail && (
-                          <Image
-                            src={`https:${education.fields.schoolThumbnail.fields.file.url}`}
-                            alt={`${education.fields.school || 'School'} logo`}
-                            width={48}
-                            height={48}
-                            style={{ objectFit: 'cover' }}
-                            className="mr-4 w-auto h-auto md:-ml-16"
-                          />
-                        )}
-                        <div className="grow">
-                          <div className="flex items-start">
-                            <h3 className="grow text-lg font-serif font-medium">
-                              {education.fields.degree ? education.fields.degree : null}
-                              {education.fields.degree && education.fields.fieldOfStudy ? <SeparatorSpan /> : null}
-                              {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
-                            </h3>
-                            <span className="block text-sm text-neutral-500 whitespace-nowrap leading-7 ml-4">
-                              {education.fields.startDate ? dateFormatter(new Date(education.fields.startDate)) : null}
-                              {education.fields.startDate && education.fields.endDate ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
-                              {education.fields.endDate ? dateFormatter(new Date(education.fields.endDate)) : null}
+                {educationEntries.items.map(education => {
+                  const period = (
+                    <span className="block text-sm text-neutral-500 whitespace-nowrap leading-7 lg:ml-4">
+                      {education.fields.startDate ? dateFormatter(new Date(education.fields.startDate)) : null}
+                      {education.fields.startDate && education.fields.endDate ? <SeparatorSpan symbol={<>&#126;</>} /> : null}
+                      {education.fields.endDate ? dateFormatter(new Date(education.fields.endDate)) : null}
+                    </span>
+                  )
+
+                  return (
+                    <li key={education.sys.id}>
+                      <div>
+                        <div className="flex items-start">
+                          {education.fields.schoolThumbnail && (
+                            <Image
+                              src={`https:${education.fields.schoolThumbnail.fields.file.url}`}
+                              alt={`${education.fields.school || 'School'} logo`}
+                              width={48}
+                              height={48}
+                              style={{ objectFit: 'cover' }}
+                              className="mr-4 w-auto h-auto md:-ml-16"
+                            />
+                          )}
+                          <div className="grow">
+                            <div className="flex items-start">
+                              <h3 className="grow text-lg font-serif font-medium">
+                                {education.fields.degree ? education.fields.degree : null}
+                                {education.fields.degree && education.fields.fieldOfStudy ? <SeparatorSpan /> : null}
+                                {education.fields.fieldOfStudy ? education.fields.fieldOfStudy : null}
+                              </h3>
+                              <div className="hidden lg:block">
+                                {period}
+                              </div>
+                            </div>
+                            <span className="block text-sm text-neutral-500">
+                              {education.fields.school ? education.fields.school : null}
+                              {education.fields.school && education.fields.schoolLocation ? <SeparatorSpan /> : null}
+                              {education.fields.schoolLocation ? education.fields.schoolLocation : null}
                             </span>
+                            <div className="block lg:hidden">
+                              {period}
+                            </div>
                           </div>
-                          <span className="block text-sm text-neutral-500">
-                            {education.fields.school ? education.fields.school : null}
-                            {education.fields.school && education.fields.schoolLocation ? <SeparatorSpan /> : null}
-                            {education.fields.schoolLocation ? education.fields.schoolLocation : null}
-                          </span>
                         </div>
-                      </div>
-                      {education.fields.attachments && education.fields.attachments.length > 0 && (
-                        <>
-                          <h4 className="mt-2 mb-2">Attachments:</h4>
-                          <ul className="space-y-4">
-                            {education.fields.attachments.map(attachment => {
-                              const renderContent = () => (
-                                <div className="flex">
-                                  {attachment.fields.thumbnail && (
-                                    <Image
-                                      src={`https:${attachment.fields.thumbnail.fields.file.url}`}
-                                      alt={`${attachment.fields.title || 'Attachment'} logo`}
-                                      width={106}
-                                      height={60}
-                                      className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0"
-                                    />
-                                  )}
-                                  <div>
-                                    {attachment.fields.title && (
-                                      <h5 className="text-sm flex items-center">
-                                        <span className="text-black">{attachment.fields.title}</span>
-                                        {attachment.fields.link && <FiExternalLink className="ml-1 shrink-0" />}
-                                      </h5>
+                        {education.fields.attachments && education.fields.attachments.length > 0 && (
+                          <>
+                            <h4 className="mt-2 mb-2">Attachments:</h4>
+                            <ul className="space-y-4">
+                              {education.fields.attachments.map(attachment => {
+                                const renderContent = () => (
+                                  <div className="flex">
+                                    {attachment.fields.thumbnail && (
+                                      <Image
+                                        src={`https:${attachment.fields.thumbnail.fields.file.url}`}
+                                        alt={`${attachment.fields.title || 'Attachment'} logo`}
+                                        width={106}
+                                        height={60}
+                                        className="mr-4 w-[106px] h-[60px] border rounded object-cover shrink-0"
+                                      />
                                     )}
-                                    {attachment.fields.description && <span className="block text-sm text-neutral-500">{attachment.fields.description}</span>}
+                                    <div>
+                                      {attachment.fields.title && (
+                                        <h5 className="text-sm flex items-center">
+                                          <span className="text-black">{attachment.fields.title}</span>
+                                          {attachment.fields.link && <FiExternalLink className="ml-1 shrink-0" />}
+                                        </h5>
+                                      )}
+                                      {attachment.fields.description && <span className="block text-sm text-neutral-500">{attachment.fields.description}</span>}
+                                    </div>
                                   </div>
-                                </div>
-                              )
+                                )
 
-                              return (
-                                <li key={attachment.sys.id}>
-                                  {attachment.fields.link ? (
-                                    <a className="text-neutral-500 hover:text-black" href={attachment.fields.link} target="_blank">
-                                      {renderContent()}
-                                    </a>
-                                  ) : renderContent()}
-                                </li>
-                              )
-                            })}
-                          </ul>
+                                return (
+                                  <li key={attachment.sys.id}>
+                                    {attachment.fields.link ? (
+                                      <a className="text-neutral-500 hover:text-black" href={attachment.fields.link} target="_blank">
+                                        {renderContent()}
+                                      </a>
+                                    ) : renderContent()}
+                                  </li>
+                                )
+                              })}
+                            </ul>
 
-                        </>
-                      )}
-                    </div>
-                  </li>
-                ))}
+                          </>
+                        )}
+                      </div>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </div>

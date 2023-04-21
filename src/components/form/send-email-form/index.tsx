@@ -45,10 +45,10 @@ const SendEmailForm = ({ className }: Props) => {
   return (
     <form className={className} onSubmit={handleSubmit(onSubmit)}>
       <Input label="Name" error={errors.name} {...register('name')} />
-      <Input label="Email" error={errors.email} {...register('email')} />
+      <Input label="Email" error={errors.email} placeholder="How can I contact you back?" {...register('email')} />
       <TextArea
         label="Message"
-        placeholder="Be as descriptive as possible"
+        placeholder="Be as descriptive as possible."
         error={errors.message}
         {...register('message')}
       />

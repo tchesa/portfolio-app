@@ -1,7 +1,5 @@
 import Link from "next/link"
 import { Shape1 } from "../shapes"
-import { FiGithub, FiTwitter } from "react-icons/fi"
-import { AiOutlineWhatsApp } from "react-icons/ai"
 import SideNav from "../side-nav"
 
 const Header = () => {
@@ -16,21 +14,6 @@ const Header = () => {
             </li>
             <li>
               <Link className="hover:underline text-lg font-medium font-serif text-orange-900 bg-orange-50" href="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link className="text-orange-900" href="https://wa.me/5531999949263" target="_blank">
-                <AiOutlineWhatsApp className="text-2xl" />
-              </Link>
-            </li>
-            <li>
-              <Link className="text-orange-900" href="https://github.com/tchesa" target="_blank">
-                <FiGithub className="text-2xl" />
-              </Link>
-            </li>
-            <li>
-              <Link className="text-orange-900" href="https://twitter.com/tchesa" target="_blank">
-                <FiTwitter className="text-2xl" />
-              </Link>
             </li>
           </ul>
         </nav>
