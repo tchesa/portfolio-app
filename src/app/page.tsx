@@ -663,7 +663,11 @@ export default async function Home() {
           <span className="text-xl bg-orange-50">a web developer with expertise in building robust and scalable web applications. With expertise in React, Redux, NextJS, Typescript, CSS, Sass, Tailwind CSS, I&apos;m able to craft custom solutions that meet the unique needs of each project.</span>
         </div>
         <div className="grow lg:relative">
-          <PortfolioUpdate width={600} height={600} className="opacity-20 lg:opacity-100 md:block absolute top-[10px] lg:top-[-75px] right-0 -z-20" />
+          <PortfolioUpdate
+            width={600}
+            height={600}
+            className="hidden md:block opacity-20 lg:opacity-100 absolute top-[10px] lg:top-[-75px] right-0 -z-20"
+          />
         </div>
       </div>
       <div className="mt-10 text-center">
