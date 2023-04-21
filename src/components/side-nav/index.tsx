@@ -21,8 +21,8 @@ const SideNav = ({ className }: Props) => {
   }
 
   return (
-    <>
-      <button type="button" className={`p-2 ${className || ''}`} onClick={open}>
+    <div className={className}>
+      <button type="button" className="p-2" onClick={open}>
         <FiMenu className="text-orange-900 text-2xl" />
       </button>
       <div className={`flex fixed w-screen h-screen top-0 right-0 z-10 overflow-hidden ${isOpen ? '' : 'pointer-events-none'}`}>
@@ -59,7 +59,7 @@ const SideNav = ({ className }: Props) => {
           </ul>
         </nav>
       </div>
-    </>
+    </div>
   )
 }
 
