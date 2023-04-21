@@ -38,3 +38,11 @@ header.print-hidden,
 a:focus-visible {
   @apply outline-orange-700 outline-2 border-orange-700;
 }
+
+.text-shadow-orange-50 {
+  text-shadow: 2px 2px rgb(255 247 237);
+}
+
+.page-layout {
+  @apply container mx-auto px-8 lg:max-w-[1280px];
+}
