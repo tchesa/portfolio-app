@@ -1,25 +1,19 @@
 import MarkdownRender from "@/components/markdown-render"
-import { Education, Employment, EmploymentType, LocationType } from "@/types/contentful"
-import { createClient } from "contentful"
+import { EmploymentType, LocationType } from "@/types/contentful"
 import Image from "next/image"
 import SeparatorSpan from "./separator-span"
 import { FiExternalLink, FiPrinter } from 'react-icons/fi'
 import PrintButton from "@/components/print-button"
+import { getEducationCollection, getEmploymentCollection } from "@/services/contentful"
 
 const ResumePage = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID || '',
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY || '',
-  })
 
   const [employmentEntries, educationEntries] = await Promise.all([
-    client.getEntries<Employment>({
-      content_type: 'employment'
-    }),
-    client.getEntries<Education>({
-      content_type: 'education'
-    }),
+    getEmploymentCollection(),
+    getEducationCollection(),
   ])
+
+  console.log('educationEntries', educationEntries.items[0].fields.attachments)
 
   const employmentTypeLabel: { [employmentType in EmploymentType]: string } = {
     'contract': 'Contract',
