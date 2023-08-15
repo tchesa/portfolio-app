@@ -674,6 +674,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{
           __html: `
         function myCallback(identification) {
+          console.log('identification', identification);
           // We want to ignore 'isp' type identifications
           if (identification && identification.type !== "isp") {
             // The company was successfully identified!
