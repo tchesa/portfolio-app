@@ -669,8 +669,10 @@ export default async function Home() {
             snid('verify', '8423142');`,
         }}
       />
-      <Script id="spotter-callback" dangerouslySetInnerHTML={{
-        __html: `
+      <Script
+        id="spotter-callback"
+        dangerouslySetInnerHTML={{
+          __html: `
         function myCallback(identification) {
           // We want to ignore 'isp' type identifications
           if (identification && identification.type !== "isp") {
@@ -697,8 +699,9 @@ export default async function Home() {
           token: "887|YfYMkutUW6uJo27q7JuZrhoCof35cfBzfnKcLNVW",
           callback: myCallback,
         };
-        `
-      }}
+        `,
+        }}
+      />
       <main className="py-4 mb-20 page-layout">
         <div className="flex">
           <div className="pt-[120px] max-w-[500px]">
