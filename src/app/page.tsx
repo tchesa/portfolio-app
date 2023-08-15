@@ -666,7 +666,7 @@ export default async function Home() {
             h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8423092.js';
             h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
                 
-            snid('verify', '8423092');`,
+            snid('verify', '8423142');`,
         }}
       />
       <main className="py-4 mb-20 page-layout">
