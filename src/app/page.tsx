@@ -669,6 +669,36 @@ export default async function Home() {
             snid('verify', '8423142');`,
         }}
       />
+      <Script id="spotter-callback" dangerouslySetInnerHTML={{
+        __html: `
+        function myCallback(identification) {
+          // We want to ignore 'isp' type identifications
+          if (identification && identification.type !== "isp") {
+            // The company was successfully identified!
+            var company = identification.company;
+      
+            // You can use the company object to build your Spotter integration.
+            // Here are some commonly used attributes available on the company object:
+            //
+            // company.industry
+            // company.employee_range
+            // company.founded_year
+            // company.location
+            // company.emails
+            // company.phones
+            //
+            // For a full reference of all available company variables, see full company object:
+            console.log(company);
+          }
+        }
+      
+        // Spotter API settings
+        window.SpotterSettings = {
+          token: "887|YfYMkutUW6uJo27q7JuZrhoCof35cfBzfnKcLNVW",
+          callback: myCallback,
+        };
+        `
+      }}
       <main className="py-4 mb-20 page-layout">
         <div className="flex">
           <div className="pt-[120px] max-w-[500px]">
