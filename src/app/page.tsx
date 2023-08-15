@@ -704,7 +704,7 @@ export default async function Home() {
         }}
       />
       <main className="py-4 mb-20 page-layout">
-        <div className="flex">
+        <div className="flex 2">
           <div className="pt-[120px] max-w-[500px]">
             <span className="text-xl bg-orange-50">Hi there! I&apos;m</span>
             <span className="font-serif text-5xl text-orange-900 text-shadow-orange-50 block">
