@@ -3,7 +3,8 @@ import RepositoryCard from "@/components/repository-card";
 import PortfolioUpdate from "@/components/shapes/portfolio-update";
 import { Repository } from "@/types/github";
 import Link from "next/link";
-import { FiMail } from 'react-icons/fi'
+import Script from "next/script";
+import { FiMail } from "react-icons/fi";
 
 // const pinnedRepositories = [
 //   'snake',
@@ -18,7 +19,7 @@ const repositories: Repository[] = [
   {
     id: 112896649,
     // node_id: 'MDEwOlJlcG9zaXRvcnkxMTI4OTY2NDk=',
-    name: 'snake',
+    name: "snake",
     // full_name: 'tchesa/snake',
     // private: false,
     // owner: {
@@ -41,8 +42,8 @@ const repositories: Repository[] = [
     //   type: 'User',
     //   site_admin: false
     // },
-    html_url: 'https://github.com/tchesa/snake',
-    description: 'Simple web implementation of the classic snake game.',
+    html_url: "https://github.com/tchesa/snake",
+    description: "Simple web implementation of the classic snake game.",
     // fork: false,
     // url: 'https://api.github.com/repos/tchesa/snake',
     // forks_url: 'https://api.github.com/repos/tchesa/snake/forks',
@@ -92,7 +93,7 @@ const repositories: Repository[] = [
     // size: 155,
     stargazers_count: 11,
     // watchers_count: 11,
-    language: 'JavaScript',
+    language: "JavaScript",
     // has_issues: true,
     // has_projects: true,
     // has_downloads: true,
@@ -121,7 +122,7 @@ const repositories: Repository[] = [
   {
     id: 196049501,
     // node_id: 'MDEwOlJlcG9zaXRvcnkxOTYwNDk1MDE=',
-    name: 'hotkeys',
+    name: "hotkeys",
     // full_name: 'tchesa/hotkeys',
     // private: false,
     // owner: {
@@ -144,8 +145,8 @@ const repositories: Repository[] = [
     //   type: 'User',
     //   site_admin: false
     // },
-    html_url: 'https://github.com/tchesa/hotkeys',
-    description: 'A library to handle keybindings as event triggers',
+    html_url: "https://github.com/tchesa/hotkeys",
+    description: "A library to handle keybindings as event triggers",
     // fork: false,
     // url: 'https://api.github.com/repos/tchesa/hotkeys',
     // forks_url: 'https://api.github.com/repos/tchesa/hotkeys/forks',
@@ -195,7 +196,7 @@ const repositories: Repository[] = [
     // size: 1390,
     stargazers_count: 6,
     // watchers_count: 6,
-    language: 'TypeScript',
+    language: "TypeScript",
     // has_issues: true,
     // has_projects: true,
     // has_downloads: true,
@@ -230,7 +231,7 @@ const repositories: Repository[] = [
   {
     id: 141624488,
     // node_id: 'MDEwOlJlcG9zaXRvcnkxNDE2MjQ0ODg=',
-    name: 'optical-character-recognition',
+    name: "optical-character-recognition",
     // full_name: 'tchesa/optical-character-recognition',
     // private: false,
     // owner: {
@@ -253,8 +254,9 @@ const repositories: Repository[] = [
     //   type: 'User',
     //   site_admin: false
     // },
-    html_url: 'https://github.com/tchesa/optical-character-recognition',
-    description: 'Simple implementation of an optical character recognition script using SVM',
+    html_url: "https://github.com/tchesa/optical-character-recognition",
+    description:
+      "Simple implementation of an optical character recognition script using SVM",
     // fork: false,
     // url: 'https://api.github.com/repos/tchesa/optical-character-recognition',
     // forks_url: 'https://api.github.com/repos/tchesa/optical-character-recognition/forks',
@@ -304,7 +306,7 @@ const repositories: Repository[] = [
     // size: 5044,
     stargazers_count: 1,
     // watchers_count: 1,
-    language: 'Python',
+    language: "Python",
     // has_issues: true,
     // has_projects: true,
     // has_downloads: true,
@@ -333,7 +335,7 @@ const repositories: Repository[] = [
   {
     id: 471013281,
     // node_id: 'R_kgDOHBMXoQ',
-    name: 'virtual-meeting-ui',
+    name: "virtual-meeting-ui",
     // full_name: 'tchesa/virtual-meeting-ui',
     // private: false,
     // owner: {
@@ -356,8 +358,8 @@ const repositories: Repository[] = [
     //   type: 'User',
     //   site_admin: false
     // },
-    html_url: 'https://github.com/tchesa/virtual-meeting-ui',
-    description: 'A prototype of web-based virtual meeting app',
+    html_url: "https://github.com/tchesa/virtual-meeting-ui",
+    description: "A prototype of web-based virtual meeting app",
     // fork: false,
     // url: 'https://api.github.com/repos/tchesa/virtual-meeting-ui',
     // forks_url: 'https://api.github.com/repos/tchesa/virtual-meeting-ui/forks',
@@ -407,7 +409,7 @@ const repositories: Repository[] = [
     // size: 1737,
     stargazers_count: 1,
     // watchers_count: 1,
-    language: 'TypeScript',
+    language: "TypeScript",
     // has_issues: true,
     // has_projects: true,
     // has_downloads: true,
@@ -436,7 +438,7 @@ const repositories: Repository[] = [
   {
     id: 613536420,
     // node_id: 'R_kgDOJJHSpA',
-    name: 'decifra-me-js',
+    name: "decifra-me-js",
     // full_name: 'tchesa/decifra-me-js',
     // private: false,
     // owner: {
@@ -459,8 +461,8 @@ const repositories: Repository[] = [
     //   type: 'User',
     //   site_admin: false
     // },
-    html_url: 'https://github.com/tchesa/decifra-me-js',
-    description: 'A javascript implementation of a puzzle game.',
+    html_url: "https://github.com/tchesa/decifra-me-js",
+    description: "A javascript implementation of a puzzle game.",
     // fork: false,
     // url: 'https://api.github.com/repos/tchesa/decifra-me-js',
     // forks_url: 'https://api.github.com/repos/tchesa/decifra-me-js/forks',
@@ -510,7 +512,7 @@ const repositories: Repository[] = [
     // size: 280,
     stargazers_count: 0,
     // watchers_count: 0,
-    language: 'TypeScript',
+    language: "TypeScript",
     // has_issues: true,
     // has_projects: true,
     // has_downloads: true,
@@ -539,7 +541,7 @@ const repositories: Repository[] = [
   {
     id: 624957549,
     // node_id: 'R_kgDOJUAYbQ',
-    name: 'ease',
+    name: "ease",
     // full_name: 'tchesa/ease',
     // private: false,
     // owner: {
@@ -562,8 +564,8 @@ const repositories: Repository[] = [
     //   type: 'User',
     //   site_admin: false
     // },
-    html_url: 'https://github.com/tchesa/ease',
-    description: 'A tiny javascript easing package with no dependencies.',
+    html_url: "https://github.com/tchesa/ease",
+    description: "A tiny javascript easing package with no dependencies.",
     // fork: false,
     // url: 'https://api.github.com/repos/tchesa/ease',
     // forks_url: 'https://api.github.com/repos/tchesa/ease/forks',
@@ -613,7 +615,7 @@ const repositories: Repository[] = [
     // size: 199,
     stargazers_count: 0,
     // watchers_count: 0,
-    language: 'TypeScript',
+    language: "TypeScript",
     // has_issues: true,
     // has_projects: true,
     // has_downloads: true,
@@ -644,8 +646,8 @@ const repositories: Repository[] = [
     // temp_clone_token: null,
     // network_count: 0,
     // subscribers_count: 1
-  }
-]
+  },
+];
 
 export default async function Home() {
   // const repositories = await Promise.all<Repository>(pinnedRepositories.map(async name => {
@@ -655,34 +657,59 @@ export default async function Home() {
   // }))
 
   return (
-    <main className="py-4 mb-20 page-layout">
-      <div className="flex">
-        <div className="pt-[120px] max-w-[500px]">
-          <span className="text-xl bg-orange-50">Hi there! I&apos;m</span>
-          <span className="font-serif text-5xl text-orange-900 text-shadow-orange-50 block">Cesar Lima,</span>
-          <span className="text-xl bg-orange-50">a web developer with expertise in building robust and scalable web applications. With expertise in React, Redux, NextJS, Typescript, CSS, Sass, Tailwind CSS, I&apos;m able to craft custom solutions that meet the unique needs of each project.</span>
+    <>
+      <Script
+        id="snitcher-script"
+        dangerouslySetInnerHTML={{
+          __html: `!function(s,n,i,t,c,h){s.SnitchObject=i;s[i]||(s[i]=function(){
+            (s[i].q=s[i].q||[]).push(arguments)});s[i].l=+new Date;c=n.createElement(t);
+            h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8423092.js';
+            h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
+                
+            snid('verify', '8423092');`,
+        }}
+      />
+      <main className="py-4 mb-20 page-layout">
+        <div className="flex">
+          <div className="pt-[120px] max-w-[500px]">
+            <span className="text-xl bg-orange-50">Hi there! I&apos;m</span>
+            <span className="font-serif text-5xl text-orange-900 text-shadow-orange-50 block">
+              Cesar Lima,
+            </span>
+            <span className="text-xl bg-orange-50">
+              a web developer with expertise in building robust and scalable web
+              applications. With expertise in React, Redux, NextJS, Typescript,
+              CSS, Sass, Tailwind CSS, I&apos;m able to craft custom solutions
+              that meet the unique needs of each project.
+            </span>
+          </div>
+          <div className="grow lg:relative">
+            <PortfolioUpdate
+              width={600}
+              height={600}
+              className="hidden md:block opacity-20 lg:opacity-100 absolute top-[10px] lg:top-[-75px] right-0 -z-20"
+            />
+          </div>
         </div>
-        <div className="grow lg:relative">
-          <PortfolioUpdate
-            width={600}
-            height={600}
-            className="hidden md:block opacity-20 lg:opacity-100 absolute top-[10px] lg:top-[-75px] right-0 -z-20"
-          />
+        <div className="mt-10 text-center">
+          <Link href="/contact">
+            <Button type="button">
+              <FiMail className="inline mr-2" />
+              Send me a message
+            </Button>
+          </Link>
         </div>
-      </div>
-      <div className="mt-10 text-center">
-        <Link href="/contact">
-          <Button type="button"><FiMail className="inline mr-2" />Send me a message</Button>
-        </Link>
-      </div>
-      <h2 className="font-serif font-normal text-2xl mt-10 mb-2 text-shadow-orange-50">Pinned repositories</h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-        {repositories.map(repository => (
-          <li key={repository.id}>
-            <RepositoryCard className="h-full" repository={repository} />
-          </li>
-        ))}
-      </ul>
-    </main>
-  )
+        <h2 className="font-serif font-normal text-2xl mt-10 mb-2 text-shadow-orange-50">
+          Pinned repositories
+        </h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+          {repositories.map((repository) => (
+            <li key={repository.id}>
+              <RepositoryCard className="h-full" repository={repository} />
+            </li>
+          ))}
+        </ul>
+      </main>
+    </>
+  );
 }
