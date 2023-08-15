@@ -663,10 +663,10 @@ export default async function Home() {
         dangerouslySetInnerHTML={{
           __html: `!function(s,n,i,t,c,h){s.SnitchObject=i;s[i]||(s[i]=function(){
             (s[i].q=s[i].q||[]).push(arguments)});s[i].l=+new Date;c=n.createElement(t);
-            h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8423092.js';
+            h=n.getElementsByTagName(t)[0];c.src='//snid.snitcher.com/8423146.js';
             h.parentNode.insertBefore(c,h)}(window,document,'snid','script');
                 
-            snid('verify', '8423142');`,
+            snid('verify', '8423146');`,
         }}
       />
       <Script
@@ -690,13 +690,13 @@ export default async function Home() {
             // company.phones
             //
             // For a full reference of all available company variables, see full company object:
-            console.log(company);
+            console.log('company', company);
           }
         }
       
         // Spotter API settings
         window.SpotterSettings = {
-          token: "887|YfYMkutUW6uJo27q7JuZrhoCof35cfBzfnKcLNVW",
+          token: "888|QlmoUcG6jLCNjjOBBbpWggdQQirnqulEAczUnIVz",
           callback: myCallback,
         };
         `,
