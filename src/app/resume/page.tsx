@@ -111,8 +111,8 @@ const ResumePage = async () => {
                 {employmentEntries.items
                   .sort((a, b) =>
                     sortByDate(
-                      new Date(a.fields.endDate || new Date()),
-                      new Date(b.fields.endDate || new Date())
+                      new Date(a.fields.startDate || new Date()),
+                      new Date(b.fields.startDate || new Date())
                     )
                   )
                   .map((employment) => {
